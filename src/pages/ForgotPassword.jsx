@@ -17,9 +17,10 @@ export default function ForgotPassword() {
     try {
       setLoading(true);
 
-      const res = await axios.post("http://localhost:5000/api/auth/forgot-password", {
-  email,
-})
+      const res = await axios.post(
+  "https://password-reset-backend-qnop.onrender.com/api/auth/forgot-password",
+  { email }
+);
 
       alert(res.data.msg || "Reset link sent to your email");
       setEmail("");

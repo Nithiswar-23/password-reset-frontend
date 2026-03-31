@@ -20,9 +20,9 @@ export default function ResetPassword() {
       setLoading(true);
 
       const res = await axios.post(
-        `http://localhost:5000/api/auth/reset-password/${token}`,
-        { password }
-      );
+  `https://password-reset-backend-qnop.onrender.com/api/auth/reset-password/${token}`,
+  { password }
+);
 
       alert(res.data.msg || "Password updated successfully");
       setPassword("");
