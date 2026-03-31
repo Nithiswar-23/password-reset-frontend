@@ -6,30 +6,26 @@ export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!email) {
-      alert("Please enter email");
-      return;
-    }
+  try {
+    setLoading(true);
 
-    try {
-      setLoading(true);
+    const res = await axios.post(
+      "https://password-reset-backend-qnop.onrender.com/api/auth/forgot-password",
+      { email }
+    );
 
-      const res = await axios.post(
-  "https://password-reset-backend-qnop.onrender.com/api/auth/forgot-password",
-  { email }
-);
+    // ✅ SHOW LINK
+    alert(`Reset link:\n${res.data.resetLink}`);
 
-      alert(res.data.msg || "Reset link sent to your email");
-      setEmail("");
-    } catch (err) {
-      alert(err.response?.data?.msg || "Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  };
+  } catch (err) {
+    alert(err.response?.data?.msg || "Error");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="center-container">
